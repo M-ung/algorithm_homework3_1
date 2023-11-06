@@ -2,8 +2,8 @@
 #define N 5 // 행렬의 크기
 
 int M[N][N]; // DP를 사용하여 현 위치에서의 가장 큰 정사각형의 크기를 저장할 2차원 배열
-int maxSize = 0; // 최대 정사각형의 크기
-int maxI = 0, maxJ = 0; // 최대 정사각형의 우측 하단 좌표
+int maxSize = 0; // 정사각형의 최대 길이
+int maxI = 0, maxJ = 0; // 최대 길이를 가진 정사각형의 우측 하단 좌표
 int A[N][N] = { // 주어진 0과 1의 행렬 A
     {0, 0, 0, 0, 0},
     {0, 0, 1, 0, 1},
@@ -18,7 +18,7 @@ int min(int a, int b, int c) {
     else return b < c ? b : c;
 }
 
-// n x n 정사각형의 최대 크기를 찾는 함수
+// n x n 정사각형 안에서 조건에 맞는 최대 크기 정사각형을 찾는 함수
 int nxn(int n) {
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < n; j++) {
@@ -26,7 +26,7 @@ int nxn(int n) {
             if (i == 0 || j == 0) {
                 M[i][j] = 1;
             } else if (A[i][j] != A[i-1][j] && A[i][j] != A[i][j-1] && A[i][j] == A[i-1][j-1]) {
-                // 인접한 상하좌우 셀들이 번갈아 나오는 패턴을 이루는 경우, 정사각형 크기를 갱신
+                // A[i][j] 기준으로 왼쪽 위 대각선과는 같고 왼쪽, 위쪽과는 다르다면, 정사각형 크기를 갱신
                 M[i][j] = min(M[i][j-1], M[i-1][j], M[i-1][j-1]) + 1;
             } else {
                 // 번갈아 나오는 패턴이 아닌 경우
@@ -46,12 +46,12 @@ int nxn(int n) {
 }
 
 int main() {
-    int size = nxn(N); // nxn 함수 호출 후 리턴 값 저장
-    printf("M[%d, %d] = %d\n", maxI+1, maxJ+1, size); // 출력
+    int Maxsize = nxn(N); // nxn 함수 호출 후 리턴 값 저장
+    printf("M[%d, %d] = %d\n", maxI+1, maxJ+1, Maxsize); // 출력
     
     for (int i = 0; i < N; i++) {
         for (int j = 0; j < N; j++) {
-            printf("%d ", M[i][j]);
+            printf("%d ", A[i][j]);
         }
         printf("\n");
     }
