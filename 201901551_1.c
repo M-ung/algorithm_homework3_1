@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#define N 5 // 행렬의 길이
+#define N 7 // 행렬의 길이
 
 int M[N+1][N+1]; // DP를 사용하여 현재 위치에서의 가장 큰 정사각형의 길이를 저장할 2차원 배열
 int maxSize = 0; // 가장 큰 정사각형의 길이
@@ -71,24 +71,16 @@ int nxn(int** A) {
 
 int main() {
     int** A = makeMatrix(N); // N x N 행렬 생성
-    printMatrix(A, N); // 생성된 행렬 출력
-    
     int Maxsize = nxn(A); // nxn 함수 호출하여 가장 큰 정사각형의 길이를 찾음
-    printf("M[%d, %d] = %d\n", maxI, maxJ, Maxsize); // 가장 큰 정사각형의 위치와 길이 출력
 
-    // DP 배열 M 출력
-    for (int i = 0; i < N+1; i++) {
-        for (int j = 0; j < N+1; j++) {
-            printf("%d ", M[i][j]);
-        }
-        printf("\n");
-    }
+    printf("M[%d, %d] = %d\n", maxI, maxJ, Maxsize); // 가장 큰 정사각형의 위치와 길이 출력
+    printMatrix(A, N); // 생성된 행렬 출력
+
 
     // 동적 할당한 메모리 해제
     for (int i = 0; i < N; i++) {
         free(A[i]);
     }
-    free(A);
     
     return 0;
 }
