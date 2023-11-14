@@ -7,7 +7,7 @@ int M[N+1][N+1]; // DP를 사용하여 현재 위치에서의 가장 큰 정사�
 int maxSize = 0; // 가장 큰 정사각형의 길이
 int maxI = 0, maxJ = 0; // 가장 큰 정사각형의 우측 하단 좌표
 
-// n*n 크기의 배열을 생성하는 함수
+// n*n 크기의 배열을 생성하는 함스
 int** makeMatrix(int n) {
     int** matrix = (int**)malloc(n * sizeof(int*));
 
